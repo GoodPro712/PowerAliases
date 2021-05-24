@@ -1,0 +1,18 @@
+.TextArea-PA {
+  width: 95%;
+  margin-left: 2.5%;
+  height: 60px;
+  font-size: 34px;
+  line-height: 100%;
+}
+.GridArea-PA {
+  display: grid;
+  grid-template-columns: 45% 45% 10%;
+}
+.RemoveBtn-PA {
+  width: 60px;
+  cursor: pointer;
+}
+div[aria-label="Close"] > svg > path {
+  fill: #72767d;
+}
