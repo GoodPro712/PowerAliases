@@ -45,7 +45,7 @@ module.exports = class Panikk extends React.PureComponent {
                 <Close
                   fill="72767d"
                   className="RemoveBtn-PA"
-                  aria-label="Close"
+                  aria-label="Close-PA"
                   onClick={() => {
                     /*
 
