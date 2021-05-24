@@ -21,6 +21,7 @@ module.exports = class Panikk extends React.PureComponent {
     this.state = {
       // example aliases [{alias: "fuck", new: "🦆"}]
       aliases: props.getSetting("aliases", []),
+      enabled: props.getSetting("enabled", true),
     };
   }
 
@@ -28,6 +29,16 @@ module.exports = class Panikk extends React.PureComponent {
     const { updateSetting, getSetting } = this.props;
     return (
       <>
+        <SwitchItem
+          note="Enable PowerAliases"
+          value={this.state.enabled}
+          onChange={() => {
+            this.setState({ enabled: !this.state.enabled });
+            this.props.toggleSetting("enabled");
+          }}
+        >
+          Enable
+        </SwitchItem>
         <FormTitle>Current Aliases</FormTitle>
         {this.state.aliases.map((data) => {
           return (
@@ -52,14 +63,6 @@ module.exports = class Panikk extends React.PureComponent {
                   className="RemoveBtn-PA"
                   aria-label="Close-PA"
                   onClick={() => {
-                    /*
-
-                    This does not work, if somebody wants to make it work feel free, it just handles deletions
-
-                    */
-                    console.log(
-                      "This does not work, if somebody wants to make it work feel free"
-                    );
                     var aliasName = document.getElementById(
                       `TextArea-1-${data.alias}-${data.new}`
                     ).value;
@@ -119,6 +122,8 @@ module.exports = class Panikk extends React.PureComponent {
                     ],
                   });
                 }
+                aliasName.value = "";
+                aliasNew.value = "";
               }}
               style={{ borderBottom: "none" }}
             />

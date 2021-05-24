@@ -10,7 +10,6 @@ module.exports = class PowerAliases extends Plugin {
       label: "PowerAliases",
       render: Settings,
     });
-
     var messageEvents = await getModule(["sendMessage"]);
     inject(
       "powerAliases-Chat",
@@ -19,18 +18,18 @@ module.exports = class PowerAliases extends Plugin {
       (args) => {
         var aliases = this.settings.get("aliases", []);
         var text = args[1].content;
-        for (var alias of aliases) {
-          var reg = new RegExp(`${alias.alias}`, "gi");
-          text = text.replace(reg, alias.new);
+        if (this.settings.get("enabled", true)) {
+          for (var alias of aliases) {
+            var reg = new RegExp(`${alias.alias}`, "gi");
+            text = text.replace(reg, alias.new);
+          }
+          args[1].content = text;
         }
-        args[1].content = text;
         return args;
       },
       true
     );
   }
-
-  // var key = _this.settings.get("keybind", "F5");
   pluginWillUnload() {
     powercord.api.settings.unregisterSettings(this.entityID);
     uninject("powerAliases-Chat");
