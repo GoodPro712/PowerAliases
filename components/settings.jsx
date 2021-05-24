@@ -1,4 +1,8 @@
-const { React, getModuleByDisplayName } = require("powercord/webpack");
+const {
+  React,
+  getModuleByDisplayName,
+  getModule,
+} = require("powercord/webpack");
 const { FormTitle } = require("powercord/components");
 const {
   SwitchItem,
@@ -9,6 +13,7 @@ const {
 const { Close } = require("powercord/components/Icons");
 const AsyncComponent = require("powercord/components/AsyncComponent");
 const TextArea = AsyncComponent.from(getModuleByDisplayName("TextArea"));
+const Dispatch = getModule(["ComponentDispatch"], false);
 module.exports = class Panikk extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -93,16 +98,29 @@ module.exports = class Panikk extends React.PureComponent {
               onClick={() => {
                 var aliasName = document.getElementById("newAliasText1");
                 var aliasNew = document.getElementById("newAliasText2");
-                updateSetting("aliases", [
-                  ...this.state.aliases,
-                  { alias: aliasName.value, new: aliasNew.value },
-                ]);
-                this.setState({
-                  aliases: [
+                if (
+                  this.state.aliases
+                    .map((a) => a.alias)
+                    .includes(aliasName.value)
+                ) {
+                  require("powercord/webpack")
+                    .getModule(["ComponentDispatch"], false)
+                    .ComponentDispatch.dispatch("SHAKE_APP", {
+                      duration: 750,
+                      intensity: 2,
+                    });
+                } else {
+                  updateSetting("aliases", [
                     ...this.state.aliases,
                     { alias: aliasName.value, new: aliasNew.value },
-                  ],
-                });
+                  ]);
+                  this.setState({
+                    aliases: [
+                      ...this.state.aliases,
+                      { alias: aliasName.value, new: aliasNew.value },
+                    ],
+                  });
+                }
               }}
               style={{ borderBottom: "none" }}
             />
