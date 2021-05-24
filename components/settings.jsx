@@ -60,23 +60,17 @@ module.exports = class Panikk extends React.PureComponent {
                     console.log(
                       "This does not work, if somebody wants to make it work feel free"
                     );
-                    // var aliasName = document.getElementById(
-                    //   `TextArea-1-${data.alias}-${data.new}`
-                    // );
-                    // var aliasNew = document.getElementById(
-                    //   `TextArea-2-${data.alias}-${data.new}`
-                    // );
-                    // console.log({
-                    //   alias: aliasName.value,
-                    //   new: aliasNew.value,
-                    // });
-                    // var newArr = this.state.aliases.filter(
-                    //   (f) =>
-                    //     f.alias === aliasName.value && f.new === aliasNew.value
-                    // );
-                    // console.log("Old Arr:", this.state.aliases);
-                    // console.log("New Arr:", newArr);
-                    // this.setState({ aliases: newArr });
+                    var aliasName = document.getElementById(
+                      `TextArea-1-${data.alias}-${data.new}`
+                    ).value;
+                    var aliasNewName = document.getElementById(
+                      `TextArea-2-${data.alias}-${data.new}`
+                    ).value;
+                    this.setState({
+                      aliases: this.state.aliases.filter(
+                        (f) => f.alias !== aliasName && f.new !== aliasNewName
+                      ),
+                    });
                   }}
                 />
               </div>
