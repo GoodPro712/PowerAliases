@@ -1,6 +1,6 @@
 const { Plugin } = require("powercord/entities");
 const { getModule } = require("powercord/webpack");
-const { inject, uninject } = require('powercord/injector');
+const { inject, uninject } = require("powercord/injector");
 const Settings = require("./components/settings");
 module.exports = class PowerAliases extends Plugin {
   async startPlugin() {
@@ -11,15 +11,20 @@ module.exports = class PowerAliases extends Plugin {
       render: Settings,
     });
 
-    var messageEvents = getModule(["sendMessage"]);
-
+    var messageEvents = await getModule(["sendMessage"]);
+    var aliases = this.settings.get("aliases", []);
+    console.log(aliases);
     inject(
-      "PowerAliases-Chat",
+      "powerAliases-Chat",
       messageEvents,
       "sendMessage",
       function (args) {
-        const text = args[1].content;
-
+        var text = args[1].content;
+        for (var alias of aliases) {
+          var reg = new RegExp(`${alias.alias}\\b`, "i");
+          console.log(reg.test(text));
+          text = text.replace(reg, alias.new);
+        }
         console.log(text);
         args[1].content = text;
         return args;
@@ -27,8 +32,9 @@ module.exports = class PowerAliases extends Plugin {
       true
     );
   }
+  // var key = _this.settings.get("keybind", "F5");
   pluginWillUnload() {
     powercord.api.settings.unregisterSettings(this.entityID);
-    uninject("PowerAliases-Chat");
+    uninject("powerAliases-Chat");
   }
 };

@@ -24,29 +24,60 @@ module.exports = class Panikk extends React.PureComponent {
     return (
       <>
         <FormTitle>Current Aliases</FormTitle>
-        {this.state.aliases.map((data) => (
-          <div className="GridArea-PA">
-            <div classNae="AliasArea-PA1">
-              <TextArea
-                className="TextArea-PA"
-                placeholder={data.alias}
-              ></TextArea>
+        {this.state.aliases.map((data) => {
+          return (
+            <div className="GridArea-PA">
+              <div classNae="AliasArea-PA1">
+                <TextArea
+                  className="TextArea-PA"
+                  id={`TextArea-1-${data.alias}-${data.new}`}
+                  value={data.alias}
+                ></TextArea>
+              </div>
+              <div className="AliasArea-PA2">
+                <TextArea
+                  className="TextArea-PA"
+                  id={`TextArea-2-${data.alias}-${data.new}`}
+                  value={data.new}
+                ></TextArea>
+              </div>
+              <div>
+                <Close
+                  fill="72767d"
+                  className="RemoveBtn-PA"
+                  aria-label="Close"
+                  onClick={() => {
+                    /*
+
+                    This does not work, if somebody wants to make it work feel free, it just handles deletions
+
+                    */
+                    console.log(
+                      "This does not work, if somebody wants to make it work feel free"
+                    );
+                    // var aliasName = document.getElementById(
+                    //   `TextArea-1-${data.alias}-${data.new}`
+                    // );
+                    // var aliasNew = document.getElementById(
+                    //   `TextArea-2-${data.alias}-${data.new}`
+                    // );
+                    // console.log({
+                    //   alias: aliasName.value,
+                    //   new: aliasNew.value,
+                    // });
+                    // var newArr = this.state.aliases.filter(
+                    //   (f) =>
+                    //     f.alias === aliasName.value && f.new === aliasNew.value
+                    // );
+                    // console.log("Old Arr:", this.state.aliases);
+                    // console.log("New Arr:", newArr);
+                    // this.setState({ aliases: newArr });
+                  }}
+                />
+              </div>
             </div>
-            <div className="AliasArea-PA2">
-              <TextArea
-                className="TextArea-PA"
-                placeholder={data.new}
-              ></TextArea>
-            </div>
-            <div>
-              <Close
-                fill="72767d"
-                className="RemoveBtn-PA"
-                aria-label="Close"
-              />
-            </div>
-          </div>
-        ))}
+          );
+        })}
         <FormTitle style={{ marginTop: "20px" }}>Add New Alias</FormTitle>
         <div className="GridArea-PA">
           <div classNae="AliasArea-PA1">
