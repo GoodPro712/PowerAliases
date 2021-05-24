@@ -7,7 +7,7 @@
 }
 .GridArea-PA {
   display: grid;
-  grid-template-columns: 45% 45% 10%;
+  grid-template-columns: 42% 42% 10%;
 }
 .RemoveBtn-PA {
   width: 60px;
@@ -16,7 +16,6 @@
 svg[aria-label="Close"] > g {
   fill: #72767d;
 }
-
-div[class="GridArea-PA"]>div>div[class~="powercord-settings-item"] {
-  padding-top: 10px;
+div[class="GridArea-PA"] > div > div[class~="powercord-settings-item"] {
+  padding-top: 15%;
 }
