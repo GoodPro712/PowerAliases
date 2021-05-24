@@ -66,9 +66,13 @@ module.exports = class Panikk extends React.PureComponent {
                     var aliasNewName = document.getElementById(
                       `TextArea-2-${data.alias}-${data.new}`
                     ).value;
+                    updateSetting(
+                      "aliases",
+                      this.state.aliases.filter((f) => f.alias !== aliasName)
+                    );
                     this.setState({
                       aliases: this.state.aliases.filter(
-                        (f) => f.alias !== aliasName && f.new !== aliasNewName
+                        (f) => f.alias !== aliasName
                       ),
                     });
                   }}
