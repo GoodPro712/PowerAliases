@@ -16,6 +16,9 @@
 svg[aria-label="Close-PA"] > g {
   fill: #72767d;
 }
-div[class="GridArea-PA"] > div > div[class~="powercord-settings-item"] {
-  padding-top: 15%;
+div[class="GridArea-PA"]>div>div[class~="powercord-settings-item"]>div[class~="divider-3573oO"] {
+  display: none;
+  border-top-width: 0px;
+  margin-top: 0px;
+  height: 0px;
 }
