@@ -13,6 +13,6 @@
   width: 60px;
   cursor: pointer;
 }
-div[aria-label="Close"] > svg > path {
+svg[aria-label="Close"] > g {
   fill: #72767d;
 }
