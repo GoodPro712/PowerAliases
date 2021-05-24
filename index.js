@@ -12,26 +12,24 @@ module.exports = class PowerAliases extends Plugin {
     });
 
     var messageEvents = await getModule(["sendMessage"]);
-    var aliases = this.settings.get("aliases", []);
-    console.log(aliases);
     inject(
       "powerAliases-Chat",
       messageEvents,
       "sendMessage",
-      function (args) {
+      (args) => {
+        var aliases = this.settings.get("aliases", []);
         var text = args[1].content;
         for (var alias of aliases) {
           var reg = new RegExp(`${alias.alias}`, "gi");
-          console.log(reg.test(text));
           text = text.replace(reg, alias.new);
         }
-        console.log(text);
         args[1].content = text;
         return args;
       },
       true
     );
   }
+
   // var key = _this.settings.get("keybind", "F5");
   pluginWillUnload() {
     powercord.api.settings.unregisterSettings(this.entityID);
