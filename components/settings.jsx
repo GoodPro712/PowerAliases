@@ -102,7 +102,9 @@ module.exports = class Panikk extends React.PureComponent {
                 if (
                   this.state.aliases
                     .map((a) => a.alias)
-                    .includes(aliasName.value)
+                    .includes(aliasName.value) ||
+                  aliasName.value === "" ||
+                  aliasName.value === " "
                 ) {
                   require("powercord/webpack")
                     .getModule(["ComponentDispatch"], false)

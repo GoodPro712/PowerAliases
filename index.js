@@ -11,8 +11,9 @@ module.exports = class PowerAliases extends Plugin {
       render: Settings,
     });
     var messageEvents = await getModule(["sendMessage"]);
+    // var editEvents = await getModule(["editMessage"]);
     inject(
-      "powerAliases-Chat",
+      "powerAliases-Messages",
       messageEvents,
       "sendMessage",
       (args) => {
@@ -32,6 +33,6 @@ module.exports = class PowerAliases extends Plugin {
   }
   pluginWillUnload() {
     powercord.api.settings.unregisterSettings(this.entityID);
-    uninject("powerAliases-Chat");
+    uninject("powerAliases-Messages");
   }
 };
