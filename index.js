@@ -21,7 +21,7 @@ module.exports = class PowerAliases extends Plugin {
         var text = args[1].content;
         if (this.settings.get("enabled", true)) {
           for (var alias of aliases) {
-            var reg = new RegExp(`${alias.alias}`, "gi");
+            var reg = new RegExp(`\b${alias.alias}\b`, "gi");
             text = text.replace(reg, alias.new);
           }
           args[1].content = text;
